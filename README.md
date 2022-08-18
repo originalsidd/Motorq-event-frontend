@@ -1,4 +1,4 @@
-### URL for local testing: hhtp://localhost:3000
+### URL for local testing: http://localhost:3000
 
 ### To login as an admin, use name: admin and password: admin
 
