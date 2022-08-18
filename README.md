@@ -1,8 +1,26 @@
+# MotorQ Assignment (Application Engineer Internship assignment)
+
 ### URL for local testing: http://localhost:3000
 
 ### To login as an admin, use name: admin and password: admin
 
 ### Demo Video Link: https://drive.google.com/file/d/1K31CLw_lIB0q2uD2NKitBNgzdS_HERhK/view?usp=sharing
+
+#### After some of the introduction are the basic commands for CRA (create react app)
+
+Name: Siddharth Pal
+Reg No: 20BDS0409
+
+This app has been made with funadmental techniques of development. I have tried to avoid few packages here and there which could be implemented by myself like Authentication, Vanilla CSS, etc.
+
+### STACK: MERN
+
+1. React for Frontend
+2. NodeJS with ExpressJS for Backend
+3. MongoDB atlas for database
+
+-   The app's landing page is the signup/signin
+-
 
 # Getting Started with Create React App
 
