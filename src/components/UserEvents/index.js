@@ -7,15 +7,22 @@ const UserEvents = () => {
     const [eventList, setEventList] = useState([]);
     const [filteredEventList, setFilteredEventList] = useState([]);
     const [search, setSearch] = useState('');
+    const [changed2, setChanged2] = useState(false);
     const value = useContext(UserId);
-    useEffect(() => {
+
+    const fetchEvents = () => {
         fetch(`http://localhost:2000/events/${value}`)
             .then((response) => response.json())
             .then((response) => {
                 setEventList(response);
                 setFilteredEventList(response);
             });
-    }, []);
+    };
+
+    useEffect(() => {
+        fetchEvents();
+        console.log(value);
+    }, [changed2]);
 
     const handleSearch = () => {
         const filteredEvents = eventList.filter(
@@ -44,6 +51,9 @@ const UserEvents = () => {
                     cap={event.capacity}
                     del={false}
                     dereg={true}
+                    changed2={changed2}
+                    setChanged2={setChanged2}
+                    fetchEvents={fetchEvents}
                 />
             ))}
         </div>

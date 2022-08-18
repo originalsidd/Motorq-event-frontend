@@ -13,7 +13,7 @@ const EvManage = () => {
     const [cap, setCap] = useState('');
     const [vis, setVis] = useState(false);
     const [disflag, setDisflag] = useState(false);
-    const [changed, setChanged] = useState(false);
+    const [changed3, setChanged3] = useState(false);
     const [upd, setUpd] = useState(false);
     const [id, setId] = useState('');
 
@@ -27,7 +27,7 @@ const EvManage = () => {
 
     useEffect(() => {
         fetchEvents();
-    }, [changed]);
+    }, [changed3]);
 
     const modalHandler = () => {
         setVis(!vis);
@@ -55,7 +55,7 @@ const EvManage = () => {
             }),
         });
         fetchEvents();
-        setChanged(!changed);
+        setChanged3(!changed3);
         setVis(false);
     };
 
@@ -64,12 +64,6 @@ const EvManage = () => {
         setUpd(true);
         setVis(true);
         const record = eventList.find((event) => event._id === id);
-        // fetch(`http://localhost:2000/events/${id}`)
-        //     .then((response) => response.json())
-        //     .then((response) => {
-        //         setName(response.event_name);
-        //     })
-        //     .catch((err) => {});
         setName(record.event_name);
         setDesc(record.event_desc);
         setStime(record.start_time);
@@ -77,18 +71,6 @@ const EvManage = () => {
         setLat(record.location.lat);
         setLong(record.location.long);
         setCap(record.capacity);
-        // fetch('http://localhost:2000/events', {
-        //     method: 'post',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({
-        //         event_name: name,
-        //         event_desc: desc,
-        //         start_time: stime,
-        //         end_time: etime,
-        //         location: { lat, long },
-        //         capacity: cap,
-        //     }),
-        // });
     };
 
     const updateEventHandler = () => {
@@ -105,7 +87,7 @@ const EvManage = () => {
             }),
         });
         fetchEvents();
-        setChanged(!changed);
+        setChanged3(!changed3);
         setUpd(false);
         setVis(false);
     };
@@ -246,9 +228,10 @@ const EvManage = () => {
                     del={true}
                     disflag={disflag}
                     setDisflag={setDisflag}
-                    setChanged={setChanged}
-                    changed={changed}
+                    setChanged3={setChanged3}
+                    changed3={changed3}
                     updateHandler={updateHandler}
+                    fetchEvents={fetchEvents}
                 />
             ))}
         </div>

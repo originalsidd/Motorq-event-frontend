@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { FaCameraRetro } from 'react-icons/fa';
+import { UserId } from '../../pages/Home';
 
 const EventCard = (props) => {
     const [delpop, setDelpop] = useState(false);
+    const value = useContext(UserId);
+    const [clicked, setClicked] = useState(false);
+    const [count, setCount] = useState(0);
 
     const deleteHandler = () => {
         if (!props.disflag) setDelpop(true);
@@ -15,11 +19,43 @@ const EventCard = (props) => {
         });
         setDelpop(false);
         props.setDisflag(false);
-        props.setChanged(!props.changed);
+        props.setChanged2(!props.changed3);
+        props.fetchEvents();
     };
 
-    const handleRegister = () => {};
-    const handleDeRegister = () => {};
+    const handleRegister = () => {
+        let code = Math.floor(Math.random() * 1000000000000);
+        fetch(`http://localhost:2000/events/${value}`, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                event_id: props.id,
+                code,
+            }),
+        });
+        console.log(code);
+        props.setChanged(!props.changed);
+        setClicked(!clicked);
+    };
+    const handleDeRegister = () => {
+        setCount(count + 1);
+        if (count == 1);
+        else {
+            fetch(`http://localhost:2000/events/de/${value}`, {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    event_id: props.id,
+                }),
+            });
+        }
+        props.setChanged2(!props.changed2);
+        setClicked(!clicked);
+    };
+
+    useEffect(() => {
+        props.fetchEvents();
+    }, [props.changed, props.changed2, props.changed3, clicked]);
 
     return (
         <div className='card'>

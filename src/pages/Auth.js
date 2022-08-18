@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ParticleBackground from 'react-particle-backgrounds';
 import AuthCard from './../components/AuthCard';
 import SignUp from './../components/SignUp';

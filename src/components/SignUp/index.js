@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = ({ text, toggleSign, setToken, token }) => {
     let navigate = useNavigate();
     const [name, setName] = useState('');
     const [pwd, setPwd] = useState('');
+
+    useEffect(() => {
+        localStorage.clear();
+    }, []);
 
     const nameHandler = (event) => {
         setName(event.target.value);
@@ -26,11 +30,14 @@ const SignUp = ({ text, toggleSign, setToken, token }) => {
                 body: JSON.stringify({
                     name,
                     password: pwd,
+                    events: [],
                 }),
             })
                 .then((response) => response.json())
                 .then((response) => {
-                    setToken(response);
+                    setToken(response.insertedId);
+                    localStorage.setItem('user', response.insertedId);
+                    console.log(response.insertedId);
                 })
                 .catch(console.log);
             navigate('/home');
@@ -53,6 +60,8 @@ const SignUp = ({ text, toggleSign, setToken, token }) => {
                         console.log(response);
                     } else {
                         setToken(response);
+                        localStorage.setItem('user', response);
+                        console.log(response);
                         navigate('/home');
                     }
                 })
