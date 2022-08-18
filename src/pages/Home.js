@@ -4,21 +4,25 @@ import Events from './../components/Events';
 import UserEvents from './../components/UserEvents';
 import EventsMap from './../components/EventsMap';
 
-const Home = () => {
-    const [isOpen, setIsOpen] = useState(false);
+export const UserId = React.createContext();
+
+const Home = ({ token }) => {
     const [page, setPage] = useState('events');
+
     return (
         <div>
-            <Header setPage={setPage} />
-            <div className='wrapper'>
-                {page === 'events' ? (
-                    <Events />
-                ) : page === 'user-events' ? (
-                    <UserEvents />
-                ) : (
-                    <EventsMap />
-                )}
-            </div>
+            <UserId.Provider value={token}>
+                <Header setPage={setPage} admin={false} />
+                <div className='wrapper'>
+                    {page === 'events' ? (
+                        <Events />
+                    ) : page === 'user-events' ? (
+                        <UserEvents />
+                    ) : (
+                        <EventsMap />
+                    )}
+                </div>
+            </UserId.Provider>
         </div>
     );
 };

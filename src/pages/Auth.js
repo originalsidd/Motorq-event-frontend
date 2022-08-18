@@ -29,7 +29,7 @@ const settings = {
     },
 };
 
-const Auth = () => {
+const Auth = ({ setToken, token }) => {
     const [toggleSign, setToggleSign] = useState(false);
 
     const toggleSignHandler = () => {
@@ -43,6 +43,8 @@ const Auth = () => {
                 <SignUp
                     toggleSign={toggleSign}
                     text={toggleSign ? <div>SignIn</div> : <div>SignUp</div>}
+                    setToken={setToken}
+                    token={token}
                 />
 
                 <button

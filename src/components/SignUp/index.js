@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const SignUp = ({ text, toggleSign }) => {
+const SignUp = ({ text, toggleSign, setToken, token }) => {
     let navigate = useNavigate();
     const [name, setName] = useState('');
     const [pwd, setPwd] = useState('');
@@ -29,7 +29,9 @@ const SignUp = ({ text, toggleSign }) => {
                 }),
             })
                 .then((response) => response.json())
-                .then((response) => console.log(response))
+                .then((response) => {
+                    setToken(response);
+                })
                 .catch(console.log);
             navigate('/home');
         } else {
@@ -45,14 +47,18 @@ const SignUp = ({ text, toggleSign }) => {
                 .then((response) => {
                     if (response === 'invalid') {
                         err.appendChild(document.createTextNode(response));
-                    } else {
-                        navigate('/home');
+                    } else if (response === 'admin') {
+                        navigate('/admin');
+                    } else if (response == null) {
                         console.log(response);
+                    } else {
+                        setToken(response);
+                        navigate('/home');
                     }
-                    console.log(response);
                 })
                 .catch(console.log);
         }
+        console.log(token);
     };
 
     return (

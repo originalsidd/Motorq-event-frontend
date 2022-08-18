@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import EventCard from '../EventCard';
 import SearchBar from '../SearchBar';
+import { UserId } from '../../pages/Home';
 
 const Events = () => {
     const [eventList, setEventList] = useState([]);
     const [filteredEventList, setFilteredEventList] = useState([]);
     const [search, setSearch] = useState('');
+    const value = useContext(UserId);
     useEffect(() => {
         fetch('http://localhost:2000/events')
             .then((response) => response.json())
@@ -16,8 +18,10 @@ const Events = () => {
     }, []);
 
     const handleSearch = () => {
-        const filteredEvents = eventList.filter((event) =>
-            event.name.toLowerCase().includes(search.toLowerCase())
+        const filteredEvents = eventList.filter(
+            (event) =>
+                event.event_name.toLowerCase().includes(search.toLowerCase()) ||
+                event.event_desc.toLowerCase().includes(search.toLowerCase())
         );
         setFilteredEventList(filteredEvents);
     };
@@ -30,7 +34,16 @@ const Events = () => {
                 handleSearch={handleSearch}
             />
             {filteredEventList.map((event) => (
-                <EventCard name={event.name} desc={event.desc} />
+                <EventCard
+                    key={event._id}
+                    id={event._id}
+                    name={event.event_name}
+                    desc={event.event_desc}
+                    stime={event.start_time}
+                    etime={event.end_time}
+                    cap={event.capacity}
+                    del={false}
+                />
             ))}
         </div>
     );
