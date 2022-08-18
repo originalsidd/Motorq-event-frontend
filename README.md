@@ -1,5 +1,7 @@
 ### URL for local testing: hhtp://localhost:3000
 
+### To login as an admin, use name: admin and password: admin
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
